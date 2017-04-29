@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="my-modeling:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/my_modeling_jar</output-path>
+    <root id="archive" name="my-modeling.jar">
+      <element id="module-output" name="my-modeling_main" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/junit/junit/4.11/4e031bb61df09069aeb2bffb4019e7a5034a4ee0/junit-4.11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.groovy/groovy-all/2.3.11/f6b34997d04c1538ce451d3955298f46fdb4dbd4/groovy-all-2.3.11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/jfree/jcommon/1.0.16/376f19a7c317509a57dfc684cdfd4081db7c082c/jcommon-1.0.16.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/jfree/jfreechart/1.0.13/b5fbdc552c4caec3dac4b4dcbc10d119a194946e/jfreechart-1.0.13.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-core/1.3/42a25dc3219429f0e5d060061f71acb49bf010a0/hamcrest-core-1.3.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
