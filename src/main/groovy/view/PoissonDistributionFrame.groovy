@@ -18,16 +18,21 @@ import java.awt.event.ActionListener
 
 class PoissonDistributionFrame extends CommonFrame{
     private JTextField textField
-    private ChartPanel chartPanel
+    private ChartPanel distrFunc
+    private ChartPanel probFunc
 
     @Override
     protected void createContent() {
         def panel = new JPanel()
         panel.layout = new BoxLayout(panel, BoxLayout.PAGE_AXIS)
-        if(chartPanel == null) {
-            chartPanel = createChartPanel(["1"] as HashSet<String>)
+        if(distrFunc == null) {
+            distrFunc = createDistrFunc(["1"] as HashSet<String>)
         }
-        panel.add chartPanel
+        panel.add distrFunc
+        if(probFunc == null) {
+            probFunc = createProbFunc(["1"] as HashSet<String>)
+        }
+        panel.add probFunc
         panel.add createTextField()
         panel.add createButton()
         contentPane = panel
@@ -52,7 +57,8 @@ class PoissonDistributionFrame extends CommonFrame{
             @Override
             void actionPerformed(ActionEvent e) {
                 def lambdaSet = Arrays.asList(textField.text.split(" ")) as HashSet<String>
-                chartPanel.chart.getXYPlot().setDataset(createDataset(lambdaSet))
+                distrFunc.chart.getXYPlot().setDataset(createDataset(lambdaSet))
+                probFunc.chart.getXYPlot().setDataset(createDataset2(lambdaSet))
             }
         }
     }
@@ -63,11 +69,20 @@ class PoissonDistributionFrame extends CommonFrame{
         textField
     }
 
-    private ChartPanel createChartPanel(HashSet<String> lambdas) {
+    private ChartPanel createDistrFunc(HashSet<String> lambdas) {
         new ChartPanel(ChartFactory.createXYLineChart(
-                "P(k)",
-                "Number of events", "Probability",
+                "Функция распределения",
+                "x", "y",
                 createDataset(lambdas),
+                PlotOrientation.VERTICAL,
+                true, true, false))
+    }
+
+    private ChartPanel createProbFunc(HashSet<String> lambdas) {
+        new ChartPanel(ChartFactory.createXYLineChart(
+                "Функция вероятности",
+                "x", "y",
+                createDataset2(lambdas),
                 PlotOrientation.VERTICAL,
                 true, true, false))
     }
@@ -78,6 +93,20 @@ class PoissonDistributionFrame extends CommonFrame{
             if(lambda.isNumber()) {
                 final XYSeries xySeries = new XYSeries( "poisson" + lambda )
                 PoissonDistribution.poisson(Double.parseDouble(lambda)).each { pair ->
+                    xySeries.add(pair.key, pair.value)
+                }
+                dataSet.addSeries(xySeries)
+            }
+        }
+        dataSet
+    }
+
+    private XYDataset createDataset2(HashSet<String> lambdas) {
+        def dataSet = new XYSeriesCollection()
+        lambdas.each { lambda ->
+            if(lambda.isNumber()) {
+                final XYSeries xySeries = new XYSeries( "poisson" + lambda )
+                PoissonDistribution.poisson1(Double.parseDouble(lambda)).each { pair ->
                     xySeries.add(pair.key, pair.value)
                 }
                 dataSet.addSeries(xySeries)

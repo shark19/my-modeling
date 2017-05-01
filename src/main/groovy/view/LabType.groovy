@@ -39,6 +39,12 @@ enum LabType {
         protected void createAndShow() {
             new MultipleLineFrame().setVisible true
         }
+    },
+    UNIFORM_DISTR('Uniform distribution', 6){
+        @Override
+        protected void createAndShow() {
+            new UniformDistrFrame().setVisible true
+        }
     }
 
     String labName

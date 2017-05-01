@@ -132,13 +132,12 @@ class PRNGFrame extends CommonFrame{
         new ActionListener(){
             @Override
             void actionPerformed(ActionEvent e) {
-                def uniform = new UniformDistribution()
-                bundle.uniformF = uniform.getUniDistrFuncValues(bundle.algF, r0, r1, rows)
-                bundle.uniformS = uniform.getUniDistrFuncValues(bundle.algS, r2, r3, rows)
-                bundle.uniformT = uniform.getUniDistrFuncValues(bundle.algT, r4, r5, rows)
-                bundle.uniformTableF = uniform.getUniDistrFuncValues(bundle.tableF, r0, r1, rows)
-                bundle.uniformTableS = uniform.getUniDistrFuncValues(bundle.tableS, r2, r3, rows)
-                bundle.uniformTableT = uniform.getUniDistrFuncValues(bundle.tableT, r4, r5, rows)
+                bundle.uniformF = UniformDistribution.getUniDistrFuncValues(bundle.algF, r0, r1, rows)
+                bundle.uniformS = UniformDistribution.getUniDistrFuncValues(bundle.algS, r2, r3, rows)
+                bundle.uniformT = UniformDistribution.getUniDistrFuncValues(bundle.algT, r4, r5, rows)
+                bundle.uniformTableF = UniformDistribution.getUniDistrFuncValues(bundle.tableF, r0, r1, rows)
+                bundle.uniformTableS = UniformDistribution.getUniDistrFuncValues(bundle.tableS, r2, r3, rows)
+                bundle.uniformTableT = UniformDistribution.getUniDistrFuncValues(bundle.tableT, r4, r5, rows)
                 def kolmogorov = new Kolmogorov()
                 bundle.statF = kolmogorov.statFunc(bundle.algF, r0, r1, rows)
                 bundle.statS = kolmogorov.statFunc(bundle.algS, r2, r3, rows)
