@@ -23,8 +23,8 @@ class MultipleLineController extends Thread{
         producer1 = new MultipleOrderProducer('Producer_1', line1, bundle.producerMinDelay1, bundle.producerMaxDelay1)
         producer2 = new MultipleOrderProducer('Producer_2', line1, bundle.producerMinDelay2, bundle.producerMaxDelay2)
         producer3 = new MultipleOrderProducer('Producer_3', line2, bundle.producerMinDelay3, bundle.producerMaxDelay3)
-        consumer1 = new OrderConsumer('Consumer_1', line1, bundle.consumerMinDelay1, bundle.consumerMaxDelay1)
-        consumer2 = new OrderConsumer('Consumer_2', line2, bundle.consumerMinDelay2, bundle.consumerMaxDelay2)
+        consumer1 = new OrderConsumer('Consumer_1', line1, bundle.consumerMinDelay1, bundle.consumerMaxDelay1, 0)
+        consumer2 = new OrderConsumer('Consumer_2', line2, bundle.consumerMinDelay2, bundle.consumerMaxDelay2, 0)
         generatorMinDelay = bundle.generatorMinDelay
         generatorMaxDelay = bundle.generatorMaxDelay
         line1.addObserver(consumer1)

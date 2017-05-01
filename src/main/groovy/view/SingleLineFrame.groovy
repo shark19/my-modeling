@@ -1,10 +1,12 @@
 package view
 
+import controller.singleline.OrderConsumer
 import controller.singleline.SingleLineController
 import model.singleline.Order
 import model.singleline.OrderActions
 import model.singleline.OrderStatus
 import model.singleline.OrdersArchive
+import view.components.HintTextField
 
 import javax.swing.*
 import java.awt.*
@@ -16,12 +18,13 @@ import java.text.ParseException
  * Created by chist on 22.04.2017.
  */
 class SingleLineFrame extends CommonFrame implements Observer{
-    static final String[] STAT_COLUMN_NAMES = ["All", "Passed", "Lost", "Lost percent"] as String[]
+    static final String[] STAT_COLUMN_NAMES = ["All", "Passed", "Lost", "Lost percent", "Pushed back"] as String[]
     static final String[] LINE_GRID_COLUMN_NAMES = ['№', 'id', 'Create time', 'Status'] as String[]
     private SingleLineController controller
     private JSpinner maxLineSizeSpinner, producerMinDelaySpinner, producerMaxDelaySpinner, consumerMinDelaySpinner, consumerMaxDelaySpinner
     protected static TextArea logTextArea
     protected JPanel lineViewerPanel1, statViewerPanel
+    private HintTextField backPercent
 
     @Override
     protected void createContent() {
@@ -120,6 +123,12 @@ class SingleLineFrame extends CommonFrame implements Observer{
         c.gridx = 1
         panel.add consumerMaxDelaySpinner, c
 
+        backPercent = new HintTextField('Back percent')
+        c.gridx = 0
+        c.gridy = 5
+        c.gridwidth = 2
+        panel.add backPercent, c
+
         panel
     }
 
@@ -144,6 +153,7 @@ class SingleLineFrame extends CommonFrame implements Observer{
                 bundle.producerMinDelay = getSpinnerValue(producerMinDelaySpinner) as double
                 bundle.consumerMaxDelay = getSpinnerValue(consumerMaxDelaySpinner) as double
                 bundle.consumerMinDelay = getSpinnerValue(consumerMinDelaySpinner) as double
+                bundle.backPercent = backPercent.text as double
                 controller = new SingleLineController(bundle, this as Observer)
                 controller.start()
             }
@@ -202,6 +212,7 @@ class SingleLineFrame extends CommonFrame implements Observer{
         data[0][1] = OrdersArchive.getInstance().getCountByStatus(OrderStatus.PASSED)
         data[0][2] = OrdersArchive.getInstance().getCountByStatus(OrderStatus.LOST)
         data[0][3] = OrdersArchive.getInstance().getResultStatusDiff()
+        data[0][4] = OrderConsumer.getBackOrders()
         statViewerPanel.add createTable(data, STAT_COLUMN_NAMES)
         statViewerPanel.validate()
         statViewerPanel.repaint()

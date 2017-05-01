@@ -6,5 +6,5 @@ package view
 
 class SingleLineBundle {
     int lineMaxSize
-    double producerMinDelay, producerMaxDelay, consumerMinDelay, consumerMaxDelay
+    double producerMinDelay, producerMaxDelay, consumerMinDelay, consumerMaxDelay, backPercent
 }

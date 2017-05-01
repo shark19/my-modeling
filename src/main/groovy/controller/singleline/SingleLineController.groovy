@@ -15,7 +15,7 @@ class SingleLineController extends Thread{
 
     SingleLineController(SingleLineBundle bundle, Observer observer){
         line = new Line(MultipleLineController.line1Name, bundle.lineMaxSize)
-        consumer = new OrderConsumer('Consumer_1', line, bundle.consumerMinDelay, bundle.consumerMaxDelay)
+        consumer = new OrderConsumer('Consumer_1', line, bundle.consumerMinDelay, bundle.consumerMaxDelay, bundle.backPercent)
         producer = new OrderProducer('Producer_1', line, bundle.producerMinDelay, bundle.producerMaxDelay)
         line.addObserver(consumer)
         line.addObserver(observer)
